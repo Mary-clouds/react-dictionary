@@ -1,34 +1,76 @@
 import React, {useState} from "react";
 import axios from "axios";
+import Results from "./Results";
+import Pictures from "/.Pictures";
 import "./Dictionary.css";
 
-export default function Dictionary(){
-    let [keyword, setKeyword] = useState("");
-   
-    function handleResponse(response){
-        //only displaying one definition of the keyword
-        console.log(response.data[0]);
+
+export default function Dictionary(props){
+    let [keyword, setKeyword] = useState(props.defaultKeyword);
+    let [results, setResults] = useState(null);
+    let [loaded, setLoaded]= useState(false);
+    let [pictures, setPictures] = useState(null);
+
+
+    function handleInputResponse(response){
+        //only displaying one pecisly the first definition of the keyword
+        setResults(response.data[0]);
     }
-    function search(event){
-        event.prevenDefault();
+
+    function handlePexelsResponse(response){
+        setPictures(response.data.pictures);
+    }
+
+    function search(){ 
       //Documentation: htpps://api.shecodes.io/dictionary/
         let apiKey = "1b3cfb66ad014a3fo55df2e890f445t9";
         let apiUrl =`https://api.shecodes.io/dictionary/v1/define?word=${keyword}&key=${apiKey}`;
-        axios.get(apiUrl).then(handleResponse);
+        axios.get(apiUrl).then(handleInputResponse);
+    
+        let pexelsApikey =" ";
+        let pexeldApiUrl =``;
+        let headers = {Authorization: `${pexelsApikey}`};
+        axios.get(pexeldApiUrl, { headers: headers}).then(handlePexelsResponse);
+    }
+
+    function handleSubmit(event){
+        event.preventDefault();
+        search();
     }
 
     function handleKeywordChange(event){
-        console.log(event.target.value);
+        setKeyword(event.target.value);
+    }
+
+    function load(){
+        setLoaded(true);
+        search();
+    }
+
+    if(loaded){
+        return(
+            <div className="Dictionary">
+                <section>
+                    <h1>
+                        What word do you want to look up?
+                    </h1>
+                    <form onSubmit={handleSubmit}> 
+                    <input
+                    type="search"
+                    onChange={handleKeywordChange}
+                    defaultValue={props.defaultKeyword}
+                    />
+                    </form>
+                    <div className="hint">suggested words: wine, yoga, sunrise...</div>
+                </section>
+                <Results results={results}/>
+                <Pictures pictures={pictures}/>
+            </div>
+        );
+    }else{
+        load();
+        return "Loading";
     }
    
    
-   
-
-    return(
-        <div className="Dictionary">
-            <form onSubmit={search}>
-                <input type="search" onChange={handleKeywordChange} />
-            </form>
-        </div>
-    );
 }

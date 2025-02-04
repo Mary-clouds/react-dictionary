@@ -9,7 +9,7 @@ export default function App() {
         
       </header>
       <main> 
-        <Dictionary/>
+        <Dictionary defaultKeyword="sunset"/>
       </main>
       <footer className="App-footer"><small>coded by Nevermann</small></footer>
       </div>
