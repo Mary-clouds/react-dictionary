@@ -11,9 +11,9 @@ export default function Pictures(props){
                             <div className="col-4" key={index}>
                                 <a href={picture.src.original} target="_blank" rel="noreferrer">
                                     <img
-                                    src={}
+                                    src={picture.src.landscape}
                                     className="img-fluid"
-                                    alt= {}
+                                    
                                      />
                                 </a>
                             </div>

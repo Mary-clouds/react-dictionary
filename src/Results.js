@@ -8,14 +8,7 @@ export default function Results(props){
     if(props.results.length){
         return(  <div className="Results">
             <section>
-            <h2>{props.results.word}</h2>
-            {props.results.Phonetic.map(function(phonetic, index){
-                return (
-                    <div key={index}>
-                        <Phonetic phonetic={phonetic} />
-                    </div>
-                );
-            })}
+            <Phonetic props={props.results.phonetics} />
             </section>
             {props.results.meanings.map(function(meaning, index){
                 return (
