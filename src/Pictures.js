@@ -2,18 +2,20 @@ import React from "react";
 import "./Pictures.css";
 
 export default function Pictures(props){
+   
+
     if (props.photos){
         return(
             <section className="pictures">
                 <div className="row">
-                    {props.photos.map(function(photos, index){
+                    {props.photos.map(function(photo, index){
                         return(
                             <div className="col-4" key={index}>
-                                <a href={photos.src.original} target="_blank" rel="noreferrer">
+                                <a href={photo.src.original} target="_blank" rel="noreferrer">
                                     <img
-                                    src={photos.src.landscape}
+                                    src={photo.src.landscape}
                                     className="img-fluid"
-                                    alt={photos.src.photographer}
+                                    alt={photo.src.photographer}
                                      />
                                 </a>
                             </div>

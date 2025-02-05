@@ -8,8 +8,12 @@ export default function Results(props){
     if(props.results){
         return(  <div className="Results">
             <section>
-            <Phonetic props={props.results.phonetics} />
+            <h2>{props.results.word}</h2>
+            {props.results.phonetic && (
+                <Phonetic phonetic={props.results.phonetic} />
+             )}
             </section>
+             {/* loop over the meanings array*/}
             {props.results.meanings.map(function(meaning, index){
                 return (
                     <div key={index}>

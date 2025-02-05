@@ -13,11 +13,14 @@ export default function Dictionary(props){
 
 
     function handleInputResponse(response){
+       
         //only displaying one pecisly the first definition of the keyword
         setResults(response.data[0]);
     }
 
     function handlePexelsResponse(response){
+       
+
         setPictures(response.data.photos);
     }
 
@@ -29,13 +32,14 @@ export default function Dictionary(props){
     
         let pexelsApikey =" mCag2MwZIoZruK4rFSGni7VSL36HgU1veQT9Je8K6FxYOODKv7tdgXRM";
         let pexeldApiUrl =`https://api.pexels.com/v1/search?query=${keyword}&per_page=6`;
-        let headers = {Authorization: ` ${pexelsApikey}`};
+        let headers = {Authorization: ` Bearer ${pexelsApikey}`};
         axios.get(pexeldApiUrl, { headers: headers}).then(handlePexelsResponse);
     }
 
     function handleSubmit(event){
         event.preventDefault();
         search();
+        
     }
 
     function handleKeywordChange(event){
@@ -64,7 +68,7 @@ export default function Dictionary(props){
                     <div className="hint">suggested words: wine, yoga, sunrise...</div>
                 </section>
                 <Results results={results}/>
-                <Pictures pictures={pictures}/>
+                <Pictures photos={pictures}/>
             </div>
         );
     }else{
