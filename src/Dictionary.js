@@ -1,7 +1,7 @@
 import React, {useState} from "react";
 import axios from "axios";
 import Results from "./Results";
-import Pictures from "/.Pictures";
+import Pictures from "./Pictures";
 import "./Dictionary.css";
 
 
@@ -29,7 +29,7 @@ export default function Dictionary(props){
     
         let pexelsApikey =" mCag2MwZIoZruK4rFSGni7VSL36HgU1veQT9Je8K6FxYOODKv7tdgXRM";
         let pexeldApiUrl =`https://api.pexels.com/v1/search?query=${keyword}&per_page=6`;
-        let headers = {Authorization: `Bearer ${pexelsApikey}`};
+        let headers = {Authorization: ` ${pexelsApikey}`};
         axios.get(pexeldApiUrl, { headers: headers}).then(handlePexelsResponse);
     }
 
