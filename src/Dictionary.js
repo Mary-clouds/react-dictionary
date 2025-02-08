@@ -2,6 +2,7 @@ import React, {useState} from "react";
 import axios from "axios";
 import Results from "./Results";
 import Pictures from "./Pictures";
+import franc  from "franc-min";//Language detection library
 import "./Dictionary.css";
 
 
@@ -14,13 +15,12 @@ export default function Dictionary(props){
 
     function handleInputResponse(response){
        
-        //only displaying one pecisly the first definition of the keyword
-        setResults(response.data[0]);
+        //only displaying one or the first definition of the keyword
+        setResults(response.data);
+        setLoaded(true);
     }
 
     function handlePexelsResponse(response){
-       
-
         setPictures(response.data.photos);
     }
 
@@ -32,7 +32,7 @@ export default function Dictionary(props){
     
         let pexelsApikey =" mCag2MwZIoZruK4rFSGni7VSL36HgU1veQT9Je8K6FxYOODKv7tdgXRM";
         let pexeldApiUrl =`https://api.pexels.com/v1/search?query=${keyword}&per_page=6`;
-        let headers = {Authorization: ` Bearer ${pexelsApikey}`};
+        let headers = {Authorization: `${pexelsApikey}`};
         axios.get(pexeldApiUrl, { headers: headers}).then(handlePexelsResponse);
     }
 
@@ -56,7 +56,7 @@ export default function Dictionary(props){
             <div className="Dictionary">
                 <section>
                     <h1>
-                        What word do you want to look up?
+                        What English word do you want to look up?
                     </h1>
                     <form onSubmit={handleSubmit}> 
                     <input
