@@ -11,7 +11,7 @@ export default function App() {
       <main> 
         <Dictionary defaultKeyword="sunset"/>
       </main>
-      <footer className="App-footer"><small>coded by Nevermann</small></footer>
+      <footer className="App-footer"><small>coded by <a href='https://github.com/Mary-clouds/react-dictionary' >Nevermann</a></small></footer>
       </div>
     </div>
   );
